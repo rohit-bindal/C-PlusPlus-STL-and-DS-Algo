@@ -1,0 +1,80 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+void merge(int *a, int s, int e)
+{
+    int mid= (s+e)/2;
+
+    int i = s;
+    int j = mid+1;
+    int k = s;
+    
+    int temp[100];
+
+    while(i<=mid && j<=e)
+    {
+        if(a[i]<a[j])
+        {
+            temp[k++] = a[i++];
+        }
+        else
+        {
+            temp[k++] = a[j++];
+        }
+    }
+    
+    //if j reaches to end but i doesn't reaches to the mid then we simply put all left element to temp
+    while(i<=mid)
+    {
+        temp[k++] = a[i++];
+    }
+    //if i reaches to mid but j doesn't reaches to the end then we simply put all left elements in temp
+    while(j<=e)
+    {
+      temp[k++] = a[j++];
+    }
+
+    //now copy the temp array into a array
+    for(int i = s; i<=e; i++)
+    {
+        a[i] = temp[i];
+    }
+}
+
+void mergeSort(int *a, int s, int e)
+{
+    //we don't need to sort only one element
+    if(s>=e)
+    {
+    return;
+    }
+
+    //divide
+    int mid = (s+e)/2;
+    
+    //recursively sort the two arrays
+    mergeSort(a, s, mid);
+    mergeSort(a, mid+1, e);
+
+    //merge
+    merge(a, s, e);
+}
+
+int32_t main()
+{
+  IOS;
+  int a[]={10,50,2,3,8,900,15,20,3};
+  int s = 0;
+  int e = sizeof(a)/sizeof(int)-1;
+mergeSort(a,s,e); //o(nlogn)
+for(int i =s; i<=e; i++)
+{
+    cout<<a[i]<<" ";
+}
+  return 0;
+}
+

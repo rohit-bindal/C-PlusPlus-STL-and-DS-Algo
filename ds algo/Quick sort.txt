@@ -1,0 +1,64 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+//if we apply quick sort on array of random elements then it takes time O(nlogn)
+//if we apply quick sort on already sorted array then it takes O(n*2), in this case
+//first we shuffle the elements of array randomly and then apply quick sort
+//this is also knows as Randomised Quick Sort.
+
+int partition(int *a, int s, int e)
+{
+  //it will return the index of pivot element
+
+  int i  = s-1;
+  int j = s;
+  //consider pivot element to be last one
+  int pivot = a[e];
+
+  for( ;j<e; j++)
+  {
+      if(a[j]<=pivot)
+      {
+          i++; //extending the region 1 which contains numbers smaller than the pivot element
+          swap(a[i], a[j]);
+      }
+  }
+
+  swap(a[i+1], a[e]);
+  return i+1;
+}
+
+void quickSort(int *a, int s, int e) //take O(nlogn) in average case
+{
+    //it will place the pivot element to its sorted place
+
+    if(s>=e)
+    return;
+
+    int pivot = partition(a,s,e);
+
+    //the we have to sort two arrays i.e. array left to the pivot and array right to the pivot
+
+    quickSort(a,s,pivot-1);
+    quickSort(a,pivot+1,e);
+    
+    
+}
+
+
+int main()
+{
+ 
+  int a[]={5,8,1,20,3,45,123};
+  int s = 0;
+  //initially consider the pivot element to be the last one
+  int e = sizeof(a)/sizeof(int)-1;
+  quickSort(a,s,e);
+
+  for(int i = s; i<=e ; i++)
+  {
+      cout<<a[i]<<" ";
+  }
+  return 0;
+}
+

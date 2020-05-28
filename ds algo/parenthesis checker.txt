@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool parthBalanced(string expr)
+{
+  stack <char> stack;
+  char top;
+  for(int i = 0 ;i<expr.length();i++)
+  {
+      if(expr[i]=='('||expr[i]=='['||expr[i]=='{')
+      {
+          stack.push(expr[i]);
+          continue;
+      }
+      if(stack.empty())
+      return false;
+
+      switch(expr[i])
+      {
+          case ')':
+          top = stack.top();
+          stack.pop();
+          if(top=='{'||top=='[')
+          return false;
+          break;
+
+          case ']':
+           top = stack.top();
+          stack.pop();
+          if(top=='('||top=='{')
+          return false;
+          break;
+
+          case '}':
+          top = stack.top();
+          stack.pop();
+          if(top=='['||top=='(')
+          return false;
+          break;
+      }
+  }
+  return stack.empty();
+}
+int main()
+{
+ string exp = "{{{][[()]]]}}}";
+ if(parthBalanced(exp))
+ cout<<"Balanced";
+ else
+ {
+     cout<<"Not Balanced";
+ }
+ 
+ return 0;
+}

@@ -1,0 +1,160 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0);  cout.tie(0);
+#define endl "\n"
+#define int long long
+
+struct node
+{
+  int info;
+  struct node *next;
+};
+
+node *head = NULL;
+
+void insertBeg(int data)
+{
+  node *ptr = new node();
+  ptr->info = data;
+  ptr->next = head;
+  head = ptr;
+}
+
+void insert(int data)
+{
+  node *ptr = new node();
+  ptr->info = data; 
+  ptr->next = NULL;
+
+  if(head!=NULL)
+  {
+  node *temp = head;
+  
+  while(temp->next!=NULL)
+  {
+    temp = temp->next;
+  }
+  temp->next = ptr;
+  }
+  else
+  {
+    head = ptr;
+  }
+}
+
+void print()
+{
+  if(head==NULL)
+  {
+    cout<<"The list is empty";
+  }
+  else
+  {
+  node *temp = head;
+  while(temp!=NULL)
+  {
+   cout<<temp->info<<" ";
+   temp = temp->next;
+  } }
+}
+
+void Delete()
+{
+  if(head==NULL)
+  {
+    cout<<"The list is already Empty";
+  }
+  else if(head->next==NULL)
+  {
+  node *ptr = head;
+   head = NULL;
+   free(ptr);
+  }
+  else
+  {
+    node *temp = head;
+    while(temp->next->next!=NULL)
+    {
+      temp = temp->next;
+    }
+    temp->next=NULL;
+  }
+}
+
+void DeleteFirst()
+{
+  if(head==NULL)
+  {
+    cout<<"The list is already empty";
+  }
+  else
+  {
+    node *temp = head;
+    head= temp->next;
+  }
+  
+}
+int length()
+{
+node *temp = head;
+int count =0;
+while(temp!=NULL)
+{
+ temp = temp->next;
+ count++;
+}
+return count;
+}
+
+//middle using traversal apporach
+void middle()
+{
+  int l = length();
+  node *temp = head;
+  for(int i = 0 ; i<l/2 ; i++)
+  {
+    temp = temp -> next;
+  }
+  cout<<temp->info;
+}
+
+//middle using two pointers
+void middle2()
+{
+  node *slow = head;
+  node *fast = head;
+  while(fast!=NULL && fast->next!=NULL)
+  {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  cout<<slow->info;
+}
+
+void reverse()
+{
+  node *p = NULL;
+  node *c= head;
+  node *n;
+  while(c!=NULL)
+  {
+    n=c->next;
+    c->next = p;
+    p=c;
+    c=n;
+  }
+  head = p;
+}
+int32_t main()
+{
+  IOS;
+  insert(1);
+  insert(3);
+  insert(7);
+  print();
+  cout<<endl;
+  reverse();
+  print();
+  return 0;
+}

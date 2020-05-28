@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void findPrimes(int arr[], int n)
+{
+  //dont worry about index 0 and assume that from 1 to n index there are corresponding numbers
+  for(int i = 3 ; i<=n ; i+=2)
+  {
+    //initially assume that all odd numbers from 3 are prime numbers
+    arr[i]=1;
+  }
+  for(int i = 3; i<=n ; i++)
+  {
+    if(arr[i]==1)
+    {
+      //if the number is prime then its multiple will not be prime so make them zero
+      for(int j=i*i; j <=n ; j+=i)
+      {
+        arr[j]=0;
+      }
+    }
+  }
+  arr[0]=arr[1]=0;
+  arr[2]=1;
+  for(int i = 1 ; i<=n ; i++)
+  {
+    if(arr[i]==1)
+    cout<<i<<" ";
+  }
+}
+
+int main()
+{
+ int n;
+ cin>>n;
+ int arr[n+1] = {0};
+ findPrimes(arr,n);
+ 
+ return 0;
+}

@@ -1,0 +1,90 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+class myCircularQueue
+{
+   int rear, front,size;
+   int arr[];
+   public:
+   myCircularQueue(int l)
+   {
+  
+     rear = -1;
+     front =-1;
+     size = l;
+     arr[l];
+     for(int i=0 ; i<l ;i++)
+     {
+       arr[i]=0;
+     }
+    
+   }
+   bool isEmpty()
+   {
+     if(rear==-1 && front ==-1)
+     return true;
+     else
+     return false;
+   }
+   bool isFull()
+   {
+    if(((rear+1)%size)==front)
+    return true;
+    else
+    return false;
+   }
+   void enq(int val)
+   {
+     if(isFull())
+     cout<<"Queue is full!";
+     else if(isEmpty())
+     {
+       rear =0;
+       front =0;
+       arr[0] = val;
+     }
+     else
+     {
+       rear = (rear + 1)%size;
+       arr[rear] = val;
+     }
+   }
+   void deq()
+   {
+     if(isEmpty())
+     cout<<"Queue is empty!";
+     else if(front == rear)
+     {
+       cout<<"deleted number is: "<<arr[front]<<endl;
+       arr[front] = 0;
+       front = -1;
+       rear = -1;
+     }
+     else
+     {
+       cout<<"deleted number is: "<<arr[front]<<endl;
+       arr[front]=0;
+       front = (front+1)%size;
+     }
+   }
+   void display()
+   {
+     for(int i=0 ; i<size ; i++)
+     {
+       cout<<arr[i]<<" ";
+     }
+   }
+};
+
+int main()
+{
+   
+  myCircularQueue cq(2);
+   cq.enq(10);
+   cq.enq(20);
+   cq.deq();
+   cq.enq(50);
+   cq.display();
+      return 0;
+}

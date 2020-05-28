@@ -1,0 +1,109 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define endl "\n"
+
+void buildTree(int *tree, int *a, int s, int e, int index) //O(n)
+{
+  if(s>e)
+  return;
+
+  if(s==e)
+  {
+    tree[index] = a[s];
+    return;
+  }
+
+  //childrens of i'th node will be (2*i)th node and (2*i + 1)th node
+  //total number of leaf nodes will be n
+  //total number of internal nodes will be n-1
+  //so total number of nodes in tree will be n+n-1 = 2n-1
+  //maximum number of nodes which tree array can have is 4*n + 1
+
+  int mid = (s+e)/2;
+  buildTree(tree,a,s,mid,2*index);
+  buildTree(tree,a,mid+1,e,(2*index)+1);
+
+  int left = tree[2*index];
+  int right = tree[2*index+1];
+  tree[index] = min(left,right);
+}
+
+int query(int *tree, int index , int s, int e, int qs, int qe) //O(logn)
+{
+  //no overlap so return infinity
+  if(qe<s || qs>e)
+  {
+   return INT_MAX;
+  }
+  //complete overlap
+  if(s>=qs && e<=qe)
+  {
+    return tree[index];
+  }
+
+  //else partial overlapp
+  int mid = (s+e)/2;
+  int left = query(tree, 2*index, s, mid, qs,qe);
+  int right = query(tree, 2*index+1, mid+1, e, qs, qe);
+  return min(left, right);
+}
+
+void update(int *tree, int s, int e, int i, int value, int index) //O(logn)
+{
+  //no overlap
+  if(i<s || i>e)
+  return;
+
+  //reaching at the leaf nodes
+  if(s==e)
+  {
+    tree[index] = value;
+    return;
+  }
+
+  //i is lyring in the range s-e
+  int mid = (s+e)/2;
+  update(tree,s,mid,i,value,2*index);
+  update(tree,mid+1,e,i,value,2*index+1);
+  tree[index] = min(tree[2*index], tree[2*index+1]);
+  return;
+}
+
+//updateRange will do increment in all vaues in that range by some value v
+void updateRange(int *tree, int s, int e, int index, int rs, int re, int v) //O(n)
+{
+  //No overlap
+  if(re<s || rs>e)
+  return;
+
+  //reached at leaf nodes
+  if(s==e)
+  {
+    tree[index]+=v;
+    return;
+  }
+
+  int mid = (s+e)/2;
+  updateRange(tree,s,mid,2*index,rs,re,v);
+  updateRange(tree,mid+1,e,2*index+1,rs,re,v);
+  tree[index] = min(tree[2*index], tree[2*index+1]);
+  return;
+}
+
+int main()
+{
+  int a[] = {-1,5,6,8,10,2};
+  int n = sizeof(a)/sizeof(int);
+  int s = 0;
+  int e = n-1;
+  int index = 1;
+  int tree[4*n+1];
+  buildTree(tree,a,s,e,index);
+   cout<<query(tree, index, s, e, 0,5)<<endl;
+  update(tree,s,e,2,-8,index);
+  cout<<query(tree, index, s, e, 0,5)<<endl;
+  updateRange(tree,s,e,index,1,3,10);
+  cout<<query(tree,index,s,e,0,5);
+  return 0;
+}

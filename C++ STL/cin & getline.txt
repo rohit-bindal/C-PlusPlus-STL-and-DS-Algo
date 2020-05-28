@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+//difference between cin and getline();
+
+int32_t main()
+{
+  /* string s;   //let say s = Rohit Bindal
+   cin>>s;       //only Rohit will be stored in s because cin goes till space only
+   cout<<s;*/    //s = Rohit
+
+   //so we can use getline() to take complete line
+   string s2;        //let say s2 = Rohit Bindal
+   getline(cin, s2); //now Rohit Bindal will be stored in s2
+   cout<<s2;         //s2 = Rohit Bindal
+  return 0;
+}
+

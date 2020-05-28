@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+//String tokenizer function splits string into tokens
+//on a first call, the function expects a C String
+//in subsequent calls, the function expects a NULL Pointer which means strtok have some
+//kind of static variable which store the previous state and passing NULL means
+//continuing in the same string passed
+
+int32_t main()
+{
+  IOS;
+  char str[] = "Hi I am rohit bindal";
+  char *ptr;
+  ptr = strtok(str, " ");
+  while(ptr!=NULL)
+  {
+      cout<<ptr<<endl;
+      ptr = strtok(NULL, " ");
+  }
+  return 0;
+}
+
