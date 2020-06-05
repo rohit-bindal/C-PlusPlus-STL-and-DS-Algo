@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+//Adjacency List Representation of a graph
+//       1
+//    .  .     .
+// 0     .      3
+//    .  2   .
+
+class Graph{
+    int v;
+    list<int> *l;
+   
+    public:
+    Graph(int vertex)
+    {
+        this->v = vertex;
+        this->l = new list<int>[v];
+    }
+
+    void addEdge(int x, int y)
+    {
+        l[x].push_back(y);
+        l[y].push_back(x);
+    }
+
+    void print()
+    {
+        for(int i=0; i<v; i++)
+        {
+            cout<<i<<"->";
+            for(auto item:l[i])
+            {
+                cout<<item<<",";
+            }
+            cout<<endl;
+        }
+    }
+
+};
+
+
+int32_t main()
+{
+  IOS;
+  Graph g(4);
+  g.addEdge(0,1);
+  g.addEdge(0,2);
+  g.addEdge(1,2);
+  g.addEdge(2,3);
+
+  //g(x,y means x is connected with y and y is also connected with x assuming graph to be undirected)
+
+  g.print();
+  return 0;
+}
+

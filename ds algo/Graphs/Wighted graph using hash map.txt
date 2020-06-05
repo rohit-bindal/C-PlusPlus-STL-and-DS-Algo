@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+
+//Adjacency List Representation of a graph
+//       1
+//    .  .     .
+// 0     .      3
+//    .  2   .
+
+class Graph{
+    
+    unordered_map<string, list<pair<string, int>>> l;
+    public:
+    void addEdge(string x, string y, bool bidir, int wt)
+    {
+        l[x].push_back(make_pair(y,wt));
+        if(bidir)
+        {
+            l[y].push_back(make_pair(x,wt));
+        }
+    }
+
+    void print()
+    {
+        for(auto x: l)
+        {
+            cout<<x.first<<"->";
+            list<pair<string, int>> nbrs = x.second;
+            for(auto nbr: nbrs)
+            {
+               string city = nbr.first;
+               int wt = nbr.second;
+               cout<<city<<" "<<wt<<",";
+            }
+            cout<<endl;
+        }
+    }
+};
+
+
+
+int32_t main()
+{
+  IOS;
+  Graph g;
+  g.addEdge("A", "B", true, 20);
+  g.addEdge("A", "C", true, 10);
+  g.addEdge("B","D", true, 30);
+  g.addEdge("C","D",true,40);
+  g.addEdge("A", "D", false, 50);
+  g.print();
+  return 0;
+}
+
