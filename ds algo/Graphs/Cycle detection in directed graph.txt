@@ -1,0 +1,92 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+
+//cycle detection in directed graph
+
+class Graph
+{
+  list<int> *l;
+  int v;
+
+  public:
+  Graph(int v)
+  {
+      this->v=v;
+      l = new list<int>[v];
+  }
+
+  void addEdge(int x, int y)
+  {
+      l[x].pb(y);
+  }
+
+  bool cycle_helper(bool *visited, bool *stack, int node)
+  {
+      visited[node] = true;
+      stack[node]=true;
+
+      for(auto nbrs: l[node])
+      {
+          if(stack[nbrs]==true)
+          return true;
+
+          else if(visited[nbrs]==false)
+          {
+              bool cycle_mila=cycle_helper(visited,stack,nbrs);
+              if(cycle_mila)
+              {
+                  return true;
+              }
+          }
+      }
+
+      stack[node] = false;
+      return false;
+  }
+
+  void dfs()
+  {
+      bool *stack = new bool[v];
+      bool *visited = new bool[v];
+
+      for(int i=0; i<v; i++)
+      {
+          stack[i] = visited[i] = false;
+      }
+
+     bool check = cycle_helper(visited, stack, 0);
+     if(check)
+     {
+         cout<<"Cycle found";
+     }
+     else
+     {
+         cout<<"Cycle is not present";
+     }
+  }
+  
+};
+
+int32_t main()
+{
+  IOS;
+  Graph g(7);
+  g.addEdge(0,1);
+  g.addEdge(1,2);
+  g.addEdge(2,3);
+  g.addEdge(3,4);
+  g.addEdge(4,5);
+  g.addEdge(1,5);
+  g.addEdge(5,6);
+  g.addEdge(4,2);
+  g.dfs();
+  return 0;
+}
+
