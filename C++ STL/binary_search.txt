@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+
+//binary_search (to search in sorted array (in logn time))
+
+
+int32_t main()
+{
+  IOS;
+  int arr[] = {20,32,36,40,45,48,63};
+  int n = sizeof(arr)/sizeof(int);
+  
+  bool present = binary_search(arr, arr+n, 120);
+
+  if(present)
+  {
+      cout<<"Present";
+  }
+  else
+  {
+      cout<<"Absent";
+  }
+  
+  
+  return 0;
+}
+
