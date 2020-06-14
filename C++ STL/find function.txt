@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+
+//find function
+
+
+int32_t main()
+{
+  IOS;
+  int arr[] = {5,8,15,2,30,14};
+  int n = sizeof(arr)/sizeof(int);
+
+  auto it = find(arr, arr+n, 30);
+  cout<<it<<endl; //address of the block in which our key is present
+  cout<<*it<<endl; //the value of the block in which our key is present
+
+  int index = it-arr; //index of the block in which our key is present
+  if(index==n)
+  {
+      cout<<"Key not found";
+  }
+  else
+  {
+      cout<<"Key is present at index: "<<index;
+  }
+  
+  return 0;
+}
+
