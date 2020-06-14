@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//upper_bound (it will return address of the first value which is strictly greater than the key given)
+
+int32_t main()
+{
+  IOS;
+  int arr[] = {10, 20, 40, 40, 40, 60};
+  int n = sizeof(arr)/sizeof(int);
+  
+  auto ub = upper_bound(arr, arr+n, 40);
+  cout<<"Address is: "<<ub<<endl;
+  cout<<"value is: "<<*ub<<endl;
+
+  int index = ub-arr;
+  if(index==n)
+  {
+      cout<<"There is no element present in the array which is strictly greater than the given key.";
+  }
+  else
+  {
+      cout<<"Index is: "<<index;
+  }
+
+  //for a sorted array, upper_bound - lower_bound gives the occurance frequency of the key
+    auto lb = lower_bound(arr, arr+n, 40);
+    int frequencyOfKey = ub - lb;
+
+    cout<<endl<<"Frequency of 40 is: "<<frequencyOfKey;
+  
+  return 0;
+}
+
