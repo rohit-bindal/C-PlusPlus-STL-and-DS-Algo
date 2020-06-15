@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//rotate(start, rotationPoint, end)
+//it will rotate the array about rotationPoint clockwise
+
+int32_t main()
+{
+IOS;
+  int arr[]= {10,20,30,40,50};
+  int n = sizeof(arr)/sizeof(int);
+
+  cout<<"Original: ";
+  for(int i = 0 ; i<n; i++)
+  {
+    cout<<arr[i]<<" ";
+  }
+
+  rotate(arr, arr+2, arr+n);
+
+  cout<<endl<<"Array after rotation: ";
+  for(int i=0; i<n; i++)
+  {
+    cout<<arr[i]<<" ";
+  }
+  
+  return 0;
+}
+
