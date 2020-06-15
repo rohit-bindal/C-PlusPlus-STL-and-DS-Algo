@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//next_permutation(start, end);
+
+int32_t main()
+{
+IOS;
+  int arr[]= {1,2,3};
+  int n = sizeof(arr)/sizeof(int);
+
+  cout<<"original array: ";
+  for(int i=0; i<n; i++)
+  {
+    cout<<arr[i]<<" ";
+  }
+  next_permutation(arr ,arr+n);
+  
+  cout<<endl<<"Next Permutation of the array: ";
+  for(int i=0; i<n; i++)
+  {
+    cout<<arr[i]<<" ";
+  }
+
+  return 0;
+}
+
