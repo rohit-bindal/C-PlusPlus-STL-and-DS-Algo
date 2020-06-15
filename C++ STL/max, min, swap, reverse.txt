@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//swap(number1, number2)
+//max(number1, number2)
+//min(number1, number2)
+//reverse(s,e)
+
+int32_t main()
+{
+IOS;
+ int a = 10;
+ int b = 20;
+ cout<<"Before Swapping: a= "<<a<<" b= "<<b<<endl;
+ swap(a,b);
+ cout<<"After Swapping: a= "<<a<<" b= "<<b<<endl;
+ 
+ cout<<endl;
+
+ int m = 150;
+ int n = 200;
+ int ma = max(m,n);
+ int mi = min(m,n);
+
+ cout<<"Maximum of m="<<m<<" and n="<<n<<" is: "<<ma<<endl;
+ cout<<"Minumum of m="<<m<<" and n="<<n<<" is: "<<mi<<endl;
+
+ cout<<endl;
+
+ int arr[]= {1,2,3,4,5,6};
+ int size = sizeof(arr)/sizeof(int);
+
+ cout<<"Original array: ";
+ for(int i=0; i<size; i++)
+ {
+   cout<<arr[i]<<" ";
+ }
+
+ reverse(arr, arr+size);
+
+cout<<endl<<"Reversed Array: ";
+for(int i=0; i<size; i++)
+{
+  cout<<arr[i]<<" ";
+}
+
+  return 0;
+}
+
