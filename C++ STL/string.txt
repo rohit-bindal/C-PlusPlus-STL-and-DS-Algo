@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//string container in c++
+
+
+int32_t main()
+{
+IOS;
+  char c[]={'R', 'o', 'h', 'i', 't', '\0'};
+  string r(c);
+  cout<<r<<endl;
+
+  string a = "apple";
+  string b = "mango";
+  //compare funtion returns:
+  //0 if strings are equal
+  //positive integer if a>b
+  //negative integer if a<b lexicographically
+
+  cout<<a.compare(b)<<endl;
+
+  string d = "Binda";
+  string e = d.append("l");
+  cout<<e<<endl;
+
+  //find() will return starting index
+  string f = "I am Rohit Bindal";
+  int index = f.find("Rohit");
+  cout<<"Index of R is: "<<index<<endl;
+
+  //erase() for removing characters
+  string g = "Rohit is a good student";
+  string word = "good";
+  int indx = g.find(word);
+  int length = word.length();
+  g.erase(indx, length+1);
+  cout<<g<<endl;
+
+  string h = "Bindal";
+  
+  //iterating over h
+  for(auto it=h.begin();it!=h.end();it++)
+  {
+    cout<<*it<<":";
+  }
+  cout<<endl;
+
+  //another iteration can be done by for each loop
+  //which is avaiable in c++ 11
+  for(char c:h)
+  {
+    cout<<c<<",";
+  }  
+  cout<<endl;
+
+  return 0;
+}
+
