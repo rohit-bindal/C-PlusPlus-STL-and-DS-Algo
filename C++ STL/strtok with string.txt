@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+ 
+#define IOS ios::sync_with_stdio(0); cin.tie(0); cout.tie(0);
+#define endl "\n"
+#define int long long
+#define pb push_back
+#define pf push_front
+
+//strtok(char *s, char *delimeters)
+//returns a token on each subsequent call
+//on the first call function should be passed with string argument for string 's'
+//on subsequent calls we should pass string argument as null
+//it takes char array and returns char array
+
+int32_t main()
+{
+IOS;
+ string s = "What is your result";
+ char *c = new char[s.length()+1]; //it will store all the characters in our string and in the end we will store \0
+ strcpy(c, s.c_str()); //it will convert out string in c type string and copy it into our char array c
+
+char *ptr = strtok(c, " ");
+while(ptr!=NULL)
+{
+  cout<<ptr<<endl;
+  ptr = strtok(NULL, " ");
+}
+  return 0;
+}
+
