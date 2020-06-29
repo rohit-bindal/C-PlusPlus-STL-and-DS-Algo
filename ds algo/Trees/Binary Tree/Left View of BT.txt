@@ -1,0 +1,65 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+  public:
+  int data;
+  node* left;
+  node* right;
+
+  node(int d)
+  {
+    data = d;
+    left = NULL;
+    right = NULL;
+  }
+};
+
+void helper(node* root, vector<int> &v, int level)
+{
+  static int maxLevel = -1;
+  if(root==NULL)
+  return;
+
+  if(level>maxLevel)
+  {
+    maxLevel = level;
+    v.push_back(root->data);
+  }
+
+  helper(root->left, v, level+1);
+  helper(root->right, v, level+1);
+}
+
+vector<int> leftViewOfBT(node* root)
+{
+  vector<int> v;
+  helper(root, v, 0);
+  return v;
+}
+
+node* buildTree()
+{
+  int d;
+  cin>>d;
+
+  if(d==-1)
+  return NULL;
+
+  node* root= new node(d);
+  root->left = buildTree();
+  root->right = buildTree();
+  return root;
+}
+
+int main()
+{
+  node* root = buildTree();
+  vector<int> v = leftViewOfBT(root);
+  for(auto item: v)
+  {
+    cout<<item<<" ";
+  }
+  return 0;
+}

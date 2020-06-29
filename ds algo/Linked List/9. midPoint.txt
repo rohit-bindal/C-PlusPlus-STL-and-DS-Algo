@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int data)
+    {
+        this->data= data;
+        next = NULL;
+    }
+};
+
+void print(node *  head)
+{
+    while(head!=NULL)
+    {
+        cout<<head->data<<"->";
+        head= head->next;
+    }
+}
+
+void insertAtEnd(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head = n;
+    }
+    else
+    {
+        node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+
+void buildList(node* &head)
+{
+    int d;
+    cin>>d;
+
+    while(d!=-1)
+    {
+        insertAtEnd(head, d);
+        cin>>d;
+    }
+}
+
+void midNode(node* head)
+{
+    if(head==NULL || head->next==NULL)
+     return head;
+     
+    node* slow = head;
+    node* fast = head;
+
+    //if you want to compute the first middle point in list of even length
+    //then you can initialize fase with head->next
+
+    while(fast!=NULL && fast->next!=NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    cout<<slow->data;
+}
+
+int main()
+{
+    node* head= NULL;
+    buildList(head);
+    cout<<"Mid node is: ";
+    midNode(head);
+    return 0;
+}

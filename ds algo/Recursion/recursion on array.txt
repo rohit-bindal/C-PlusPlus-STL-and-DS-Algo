@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+bool isSorted(int a[], int n)
+{
+  if(n==0 || n==1)
+  {
+    return true;
+  }
+
+  //arrays are always passed by reference
+  //we pass the base address of the array i.e. address of the first element of the array
+
+ //breaking array of size into two parts of size 1 and n-1
+  if(a[0]<a[1] and isSorted(a+1, n-1)){
+    //a+1 is the base address of the sub array i.e. address of first element of the sub array
+    return true;
+  }
+  return false;
+}
+
+int main()
+{
+ int a[6] = {1,2,3,4,5,3};
+ bool check = isSorted(a,6);
+ if(check)
+ cout<<"Sorted";
+ else cout<<"Not Sorted";
+  return 0;
+}
+

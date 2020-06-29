@@ -1,0 +1,98 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int data)
+    {
+        this->data= data;
+        next = NULL;
+    }
+};
+
+void print(node *  head)
+{
+    while(head!=NULL)
+    {
+        cout<<head->data<<"->";
+        head= head->next;
+    }
+}
+
+void insertAtEnd(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head = n;
+    }
+    else
+    {
+        node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+
+void buildList(node* &head)
+{
+    int d;
+    cin>>d;
+
+    while(d!=-1)
+    {
+        insertAtEnd(head, d);
+        cin>>d;
+    }
+}
+
+istream& operator>>(istream &is, node* &a)
+{
+    buildList(a);
+    return is;
+}
+
+ostream& operator<<(ostream &os, node* &a)
+{
+    print(a);
+    return os;
+}
+node* merge(node* a, node* b)
+{
+    if(a==NULL)
+    return b;
+
+    if(b==NULL)
+    return a;
+
+    node* c;
+    if(a->data<b->data)
+    {
+       c = a;
+       c->next = merge(a->next, b);
+    }
+    else
+    {
+        c= b;
+        c->next = merge(a, b->next);
+    }
+    return c;
+}
+
+int main()
+{
+    node* a = NULL;
+    node* b = NULL;
+    cin>>a>>b;
+    cout<<a<<endl<<b<<endl;
+    node* c = merge(a,b);
+    cout<<c; 
+    return 0;
+}

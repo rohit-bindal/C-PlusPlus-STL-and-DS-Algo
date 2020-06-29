@@ -1,0 +1,87 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+
+//Searching a node both recursively and iteratively 
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int data)
+    {
+        this->data= data;
+        next = NULL;
+    }
+};
+
+void insertAtEnd(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head = n;
+    }
+    else
+    {
+        node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+
+bool searchNodeIteratively(node* head,int data)
+{
+    while(head!=NULL)
+    {
+        if(head->data==data)
+        return true;
+
+        head = head->next;
+    }
+    return false;
+}
+
+bool searchNodeRecursively(node* head, int data)
+{
+    if(head==NULL)
+    return false;
+
+    if(head->data == data)
+    return true;
+    else
+    {
+        return searchNodeRecursively(head->next, data);
+    }
+}
+
+
+int main()
+{
+    node* head= NULL;
+    insertAtEnd(head, 15);
+    insertAtEnd(head, 20);
+    insertAtEnd(head, 30);
+    if(searchNodeIteratively(head, 120))
+    cout<<"found";
+    else
+    {
+        cout<<"NOT FOUND";
+    }
+
+    cout<<endl;
+
+    if(searchNodeRecursively(head, 15))
+    cout<<"found";
+    else
+    {
+        cout<<"NOT FOUND";
+    }
+    
+    return 0;
+}

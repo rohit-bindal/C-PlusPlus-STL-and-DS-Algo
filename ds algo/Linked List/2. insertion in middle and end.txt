@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int d)
+    {
+        data = d;
+        next = NULL;
+    }
+};
+
+void insertAtHead(node* &head, int data)
+{
+    node* n = new node(data);
+    n->next = head;
+    head = n;
+}
+
+void print(node* head)
+{
+    //we dont neet to make new temp, we can play with head also
+    //as head is passed by value only so global head will not be affected
+    if(head==NULL)
+    cout<<"List is empty";
+
+    else
+    {
+        while(head!=NULL)
+        {
+            cout<<head->data<<" ";
+            head = head->next;
+        }
+    }   
+}
+
+void insertAtPosition(node* &head, int data, int p)
+{
+    node* temp = head;
+    for(int i=0 ; i<p-1; i++)
+    {
+        temp = temp->next;
+    }
+    node *n = new node(data);
+    n->next = temp->next;
+    temp->next = n;
+}  
+
+
+void insertAtEnd(node* &head, int data)
+{   
+    node* n = new node(data);
+    if(head==NULL)
+    {
+       head = n;
+    }
+    else
+    {
+        node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+int main()
+{  
+    node* head = NULL;
+    insertAtHead(head,15);
+    insertAtHead(head,20);
+    insertAtHead(head, 50);
+    insertAtPosition(head, 30, 2);
+    insertAtEnd(head , 100);
+    insertAtEnd(head,250);
+    insertAtPosition(head, 260, 4);
+    print(head);
+    return 0; 
+}

@@ -1,0 +1,52 @@
+#include <iostream> 
+#include <vector>
+using namespace std; 
+
+template<typename T>
+class stack
+{
+    private:
+    vector<T> v;
+
+    public:
+    bool empty()
+    {
+        return v.size()==0;
+    }  
+
+    void push(T data)
+    {
+        v.push_back(data);
+    }
+    void pop()
+    {
+        if(!empty())
+        v.pop_back();
+        else
+        {
+            cout<<"Stack is already empty";
+        }
+    }
+
+    void peek()
+    {    
+        if(!empty())
+        cout<<v[v.size()-1]<<endl;
+        else
+        cout<<"Stack is already empty";
+    }
+};
+int main()
+{
+    stack<char> s;
+    for(int i=65; i<=69; i++)
+    {
+        s.push(i);
+    } 
+    while(!s.empty())
+    {
+        s.peek();
+        s.pop();
+    } 
+    return 0;
+}

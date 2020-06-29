@@ -1,0 +1,81 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int data)
+    {
+        this->data= data;
+        next = NULL;
+    }
+};
+
+void print(node *  head)
+{
+    while(head!=NULL)
+    {
+        cout<<head->data<<"->";
+        head= head->next;
+    }
+}
+
+void insertAtEnd(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head = n;
+    }
+    else
+    {
+        node* temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+
+void buildList(node* &head)
+{
+    int d;
+    cin>>d;
+
+    while(d!=-1)
+    {
+        insertAtEnd(head, d);
+        cin>>d;
+    }
+}
+
+void kthNodeFromEnd(node* head, int k)
+{
+    node* slow = head;
+    node* fast = head;
+
+    while(k--)
+    {
+        fast = fast->next;
+    }
+    //as fast has moved k steps so now after n-k steps it will be at NULL
+    //and simeltaneously slow will also move n-k steps and will reach to the kth node from end
+    while(fast!=NULL)
+    {
+        fast = fast->next;
+        slow = slow->next;
+    }
+    cout<<slow->data;
+}
+
+int main()
+{
+    node* head= NULL;
+    buildList(head);
+    kthNodeFromEnd(head, 3);
+    return 0;
+}

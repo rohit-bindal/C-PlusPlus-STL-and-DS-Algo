@@ -1,0 +1,66 @@
+#include <bits/stdc++.h>
+using namespace std; 
+
+class node
+{
+    public:
+    int data;
+    node* left;
+    node* right;
+
+    node(int data)
+    {
+        this->data = data;
+        left = NULL;
+        right=NULL;
+    }
+};
+
+node* buildBT()
+{
+    int d;
+    cin>>d;
+
+    if(d==-1)
+    return NULL;
+
+    node* root = new node(d);
+    root->left = build();
+    root->right = build();
+
+    return root; 
+}
+
+//return true if the given BT is BST
+bool isBST(node* root, int minV = INT_MIN, int maxV = INT_MAX)
+{
+    if(root==NULL)
+    return true;
+     
+    //minV<=root<=maxV
+    //left subtree should be BST
+    //right subtree should be BST
+    if(root->data>=minV && root->data<=maxV && isBST(root->left, minV, root->data) && isBST(root->right, root->data, maxV))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+int main()
+{
+    node* root= buildBT();
+    //sample input: 5 3 1 -1 -1 -1 8 7 4 -1 -1 -1 16 -1 -1
+    if(isBST(root))
+    {
+        cout<<"YES, Tree is BST";
+    }
+    else
+    {
+        cout<<"NO, Not a BST";
+    }
+    return 0;
+}

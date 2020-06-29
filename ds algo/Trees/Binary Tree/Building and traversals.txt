@@ -1,0 +1,74 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+  public:
+  int data; 
+  node* left;
+  node* right;
+
+  node(int d)
+  {
+    data = d;
+    left =NULL;
+    right = NULL;
+  }
+};
+
+node* buildTree()
+{
+  int d;
+  cin>>d;
+
+  if(d==-1)
+  return NULL;
+
+  node *root = new node(d);
+  root->left = buildTree();
+  root->right = buildTree();
+}
+
+void preOrderPrint(node* root)
+{
+  if(root==NULL)
+  return;
+  
+  //preorder traversal root left right
+  cout<<root->data<<" ";
+  preOrderPrint(root->left);
+  preOrderPrint(root->right);
+}
+
+void postOrderPrint(node* root)
+{
+  if(root==NULL)
+  return;
+
+  postOrderPrint(root->left);
+  postOrderPrint(root->right);
+  cout<<root->data<<" ";
+}
+
+void inOrderPrint(node* root)
+{
+  if(root==NULL)
+  return;
+
+  inOrderPrint(root->left);
+  cout<<root->data<<" ";
+  inOrderPrint(root->right);
+}
+
+int main()
+{
+  node *root = buildTree();
+  cout<<"Preorder Traversal: ";
+  preOrderPrint(root);
+  cout<<endl<<"Post Order Traversal: ";
+  postOrderPrint(root);
+  cout<<endl<<"In order traversal: ";
+  inOrderPrint(root);
+  return 0;
+}
+

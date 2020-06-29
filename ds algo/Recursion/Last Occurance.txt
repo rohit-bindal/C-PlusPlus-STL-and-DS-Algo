@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//finds index of last occurence of the key 
+int lastOcc(int *a, int key, int n)
+{
+  if(n==0)
+  return -1;
+  
+  //first lets go to the complete depth
+  int i = lastOcc(a+1, key, n-1);
+  if(i==-1)
+  {
+    if(a[0]==key)
+    return 0;
+
+    else
+    {
+      return -1;
+    }
+  }
+  return i+1;
+}
+
+//another apporach can be moving from backward and finding first occurance
+
+int main()
+{
+  int a[5] = {1,2,4,4,5};
+  int key =4;
+  int n=5;
+  cout<<lastOcc(a,key,n)<<endl;
+  return 0;
+}
+

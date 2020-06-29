@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class node
+{
+   public:
+   int data;
+   node* next;
+
+   node(int data)
+   {
+       this->data= data;
+       next = NULL;
+   }
+};
+
+class Queue
+{ 
+  node* head;
+  public:
+  Queue()
+  {
+      head=NULL;
+  }
+
+  bool empty()
+  {
+      return head==NULL;
+  }
+
+  void push(int data)
+  {
+      node *n= new node(data);
+      if(empty())
+      {
+          head = n;
+      }
+      else
+      {
+          node* temp = head;
+          while(temp->next!=NULL)
+          {
+              temp = temp->next;
+          }
+          temp->next = n;
+      }
+  }
+  void pop()
+  {
+      if(!empty())
+      {
+        node* temp = head;
+        head = head->next;
+        delete temp;
+      }
+  }
+
+  int peek()
+  {
+      if(!empty())
+      {
+          return head->data;
+      }
+  }
+};
+
+int main()
+{
+    Queue q; //default size is 5
+    for(int i=1 ; i<=6 ; i++)
+    {
+        q.push(i);
+    }
+    q.pop();
+    q.pop();
+    q.push(7);
+    while(!q.empty())
+    {
+        cout<<q.peek()<<" ";
+        q.pop();
+    }
+    return 0;
+}

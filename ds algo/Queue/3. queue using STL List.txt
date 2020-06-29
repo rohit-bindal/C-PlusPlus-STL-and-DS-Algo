@@ -1,0 +1,58 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Queue
+{
+    int cs;
+    list<int> l; //this is a doubly linked list
+
+    public:
+    Queue()
+    {
+        cs = 0;
+    }
+
+    bool empty()
+    {
+        return cs==0;
+    }
+
+    void push(int data)
+    {
+        l.push_back(data);
+        cs++;
+    }
+
+    void pop()
+    {
+        if(!empty())
+        {
+            l.pop_front();
+            cs--;
+        }
+    }
+
+    int peek()
+    {
+        if(!empty())
+        return l.front();
+    }
+};
+
+int main()
+{
+    Queue q; //default size is 5
+    for(int i=1 ; i<=6 ; i++)
+    {
+        q.push(i);
+    }
+    q.pop();
+    q.pop();
+    q.push(7);
+    while(!q.empty())
+    {
+        cout<<q.peek()<<" ";
+        q.pop();
+    }
+    return 0;
+}

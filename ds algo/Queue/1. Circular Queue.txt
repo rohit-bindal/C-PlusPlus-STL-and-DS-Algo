@@ -1,0 +1,75 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Queue
+{
+   int *arr;
+   int cs, ms, front, rear; //cs = current size //ms = maximum size
+
+   public:
+   Queue(int n = 5)
+   {
+       arr = new int[n];
+       cs = 0;
+       ms = n;
+       front = 0;
+       rear = ms-1; //initially rear will be at end of queue so that it start with zero on doing (rear+1)%ms
+   }
+
+   bool isFull()
+   {
+       return cs==ms;
+   }
+   bool isEmpty()
+   {
+       return cs==0;
+   }
+   void push(int data)
+   {
+       if(!isFull())
+       {
+           rear = (rear+1)%ms;
+           arr[rear] = data;
+           cs++;
+       }
+   }
+   void pop()
+   {
+       if(!isEmpty())
+       {
+           front = (front+1)%ms;
+           cs--;
+       }
+   }
+   int peek()
+   {
+       return arr[front];
+   }
+
+   ~Queue()
+   {
+       if(arr!=NULL)
+       {
+           delete [] arr;
+           arr = NULL;
+       }
+   }
+};
+
+int main()
+{
+    Queue q; //default size is 5
+    for(int i=1 ; i<=6 ; i++)
+    {
+        q.push(i);
+    }
+    q.pop();
+    q.pop();
+    q.push(7);
+    while(!q.isEmpty())
+    {
+        cout<<q.peek()<<" ";
+        q.pop();
+    }
+    return 0;
+}

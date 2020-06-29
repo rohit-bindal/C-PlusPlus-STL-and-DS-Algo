@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//print numbers in decreasing order
+void decreasingPrint(int n)
+{
+  if(n==1)
+  {
+    cout<<"1 ";
+  return;
+  }
+
+  cout<<n<<" ";
+  decreasingPrint(n-1); //top to bottom
+}
+
+void increasingPrint(int n)
+{
+  if(n==1)
+  {
+    cout<<"1 ";
+    return;
+  }
+
+  increasingPrint(n-1);
+  cout<<n<<" "; //bottom to up
+}
+
+int main()
+{
+ int n=10;
+ cout<<"Decerasing order: ";
+ decreasingPrint(n);
+ cout<<endl<<"Increasing order ";
+ increasingPrint(n);
+  return 0;
+}
+

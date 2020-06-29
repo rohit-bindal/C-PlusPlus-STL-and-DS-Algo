@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//prints indices of all the occurances of key
+void allOcc(int *a, int key, int n, int i)
+{
+  if(i==n)
+  return;
+
+  if(a[i]==key)
+  {
+  cout<<i<<" ";
+  }
+  
+  allOcc(a, key, n, i+1);
+}
+
+//returns number of occurances and also store the indices of occurances of key in the out array
+int storeIndices(int *a, int n, int key, int j, int *out, int i)
+{
+   if(i==n)
+   return j;
+
+   if(a[i]==key)
+   {
+     out[j] = i;
+     return storeIndices(a,n,key,j+1,out,i+1);
+   }
+
+   return storeIndices(a,n,key,j,out,i+1);
+}
+
+int main()
+{
+  int a[6] = {1,2,4,4,5,4};
+  int key =4;
+  int n=6;
+  int out[100]={0};
+  int count = storeIndices(a,n,key,0,out,0);
+  cout<<"Count= "<<count<<endl;
+  cout<<"Indices: ";
+  for(int k=0; k<count; k++)
+  {
+    cout<<out[k]<<" ";
+  }
+  cout<<endl<<"All Occurances at indices: ";
+  allOcc(a,key,n,0);
+  return 0;
+}
+

@@ -1,0 +1,163 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+//insertAtHead
+//insertAtEnd
+//lengthOfList
+//insertAtPosition
+//print
+
+class node
+{
+    public:
+    int data;
+    node* next;
+
+    node(int data)
+    {
+        this->data =data;
+        next = NULL;
+    }
+};
+
+void insertAtHead(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head=n;
+    }
+    else
+    {
+        n->next = head;
+        head = n;
+    }
+}
+
+void print(node* head)
+{   
+    if(head==NULL)
+    {
+        cout<<"List is empty";
+        return;
+    }
+    while(head!=NULL)
+    {
+        cout<<head->data<<"->";
+        head = head->next;
+    }
+}
+
+void insertAtEnd(node* &head, int data)
+{
+    node* n = new node(data);
+    if(head==NULL)
+    {
+        head = n;
+        return;
+    }
+    else
+    {
+        node *temp = head;
+        while(temp->next!=NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = n;
+    }
+}
+
+int length(node* head)
+{
+    int l=0;
+    while(head!=NULL)
+    {
+        head = head->next;
+        l++;
+    }
+    return l;
+}
+
+void insertAtPosition(node* &head, int p, int data)
+{
+   if(head==NULL || p==0)
+   {
+       insertAtHead(head, data);
+   }
+   else if(p>length(head))
+   {
+       insertAtEnd(head, data);
+   }
+   else
+   {
+       //insert in middle
+       node* n = new node(data);
+       node* temp = head;
+       for(int i=0; i<p-1; i++)
+       {
+           temp = temp->next;
+       }
+       n->next = temp->next;
+       temp->next = n;
+   }
+}
+
+bool searchNode(node*head, int data)
+{
+    while(head!=NULL)
+    {   
+        if(head->data==data)
+        {
+            return true;
+        }
+        head = head->next;
+    }
+    return false;
+}
+
+void deleteAtHead(node* &head)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    node* temp = head;
+    head = temp->next;
+    delete temp;
+}
+
+void deleteAtTail(node* &head)
+{
+    if(head==NULL)
+    {
+        return;
+    }
+    node* prev = NULL;
+    node* temp = head;
+    while(temp->next!=NULL)
+    {
+        prev = temp;
+        temp = temp->next;
+        
+    }
+    prev->next = NULL;
+    delete temp;
+}
+
+int main()
+{  
+    node* head = NULL;
+    insertAtHead(head,50);
+    insertAtHead(head,40);
+    insertAtEnd(head ,60);
+    insertAtPosition(head, 0, 30);
+    insertAtPosition(head, 5,70);
+    insertAtPosition(head, 3, 55);
+    print(head);
+    cout<<endl;
+    deleteAtTail(head);
+    print(head);
+
+    
+    return 0; 
+}
